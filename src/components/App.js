@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 class App extends Component {
   componentDidMount() {
-    this.props.handleInitialData();
+    this.props.dispatch(handleInitialData())
   }
   render() {
     return (
@@ -17,7 +17,4 @@ class App extends Component {
     );
   }
 }
-export default connect(
-  null,
-  { handleInitialData }
-)(App);
+export default connect( )(App);
