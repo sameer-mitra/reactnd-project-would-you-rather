@@ -10,7 +10,7 @@ import {
   Loader,
   Dimmer
 } from 'semantic-ui-react';
-import { setAuthUser } from '../actions/authUser';
+import { setAuthedUser } from '../actions/authedUser';
 
 export class Login extends Component {
   state = {
@@ -24,7 +24,6 @@ export class Login extends Component {
     return (
       <Fragment>
         <Segment.Group>
-          <LoginHeader />
           <LoginGridLayout
             image={<BrandImage />}
             form={<ConnectedLoginForm onLoading={this.handleLoading} />}
@@ -63,7 +62,7 @@ const LoginGridLayout = ({ image, form, loading }) => (
 );
 
 const BrandImage = () => (
-  <Image src="logo192.png" size="small" centered />
+  <Image src="images/banner.png" size="big" centered />
 );
 
 class LoginForm extends Component {
@@ -78,13 +77,13 @@ class LoginForm extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    const { onLoading, setAuthUser } = this.props;
-    const authUser = this.state.value;
+    const { onLoading, setAuthedUser } = this.props;
+    const authedUser = this.state.value;
 
     new Promise((res, rej) => {
       onLoading();
       setTimeout(() => res(), 500);
-    }).then(() => setAuthUser(authUser));
+    }).then(() => setAuthedUser(authedUser));
   };
   generateDropdownData = () => {
     const { users } = this.props;
@@ -103,7 +102,7 @@ class LoginForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Header as="h2" color="blue">
-          Sign In
+          Log In
         </Header>
         <Form.Dropdown
           placeholder="Select a Friend"
@@ -115,7 +114,7 @@ class LoginForm extends Component {
           onChange={this.onChange}
           required
         />
-        <Form.Button content="Login" positive disabled={disabled} fluid />
+        <Form.Button color="blue" content="Login" fluid disabled={disabled} />
       </Form>
     );
   }
@@ -123,7 +122,7 @@ class LoginForm extends Component {
 
 const ConnectedLoginForm = connect(
   mapStateToProps,
-  { setAuthUser }
+  { setAuthedUser }
 )(LoginForm);
 
 function mapStateToProps({ users }) {

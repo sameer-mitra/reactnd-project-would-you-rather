@@ -15,11 +15,11 @@ class App extends Component {
     this.props.dispatch(handleInitialData())
   }
   render() {
-    const { authUser } = this.props;
+    const { authedUser } = this.props;
     return (
       <Router>
         <div className="App">
-          {authUser === null ? (
+          {authedUser === null ? (
             <Route
               render={() => (
                 <Login />
@@ -30,9 +30,9 @@ class App extends Component {
               <Nav />
               <Switch>
                 <Route exact path="/" component={Dashboard} />
-                <Route path="/questions/bad_id" component={Error} />
+                <Route path="/questions/error" component={Error} />
                 <Route path="/questions/:question_id" component={User} />
-                <Route path="/add" component={QuestionNew} />
+                <Route path="/new" component={QuestionNew} />
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route component={Error} />
               </Switch>
@@ -43,9 +43,9 @@ class App extends Component {
     );
   }
 }
-function mapStateToProps({ authUser }) {
+function mapStateToProps({ authedUser }) {
   return {
-    authUser
+    authedUser
   };
 }
 

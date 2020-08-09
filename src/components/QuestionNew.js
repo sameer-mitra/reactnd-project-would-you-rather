@@ -1,11 +1,104 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {
+  Segment,
+  Header,
+  Grid,
+  Divider,
+  Form,
+  Dimmer,
+  Loader
+} from 'semantic-ui-react';
+import { handleSaveQuestion } from '../actions/questions';
 
 export class QuestionNew extends Component {
+  static propTypes = {
+    authedUser: PropTypes.string.isRequired,
+    handleSaveQuestion: PropTypes.func.isRequired
+  };
+  state = {
+    validSubmit: false,
+    isLoading: false,
+    option1: '',
+    option2: ''
+  };
+  handleChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    const { authedUser, handleSaveQuestion } = this.props;
+    const { option1, option2 } = this.state;
+
+    new Promise((res, rej) => {
+      this.setState({ isLoading: true });
+      handleSaveQuestion(option1, option2, authedUser);
+      setTimeout(() => res('success'), 1000);
+    }).then(() => {
+      this.setState({
+        option1: '',
+        option2: ''
+      });
+      this.setState({ validSubmit: true });
+    });
+  };
   render() {
+    const disabled = this.state.option1 === '' || this.state.option2 === '';
+
+    if (this.state.validSubmit === true) {
+      return <Redirect to="/" />;
+    }
     return (
-      <h3>Question New</h3>
+      <Segment.Group>
+        <Header as="h3" textAlign="left" block attached="top">
+          Create a New Question
+        </Header>
+        <Grid padded>
+          <Grid.Column>
+            {this.state.isLoading && (
+              <Dimmer active inverted>
+                <Loader content="Updating" />
+              </Dimmer>
+            )}
+            <p>
+              <strong>Would you rather...</strong>
+            </p>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Input
+                id="option1"
+                placeholder="Enter option one..."
+                value={this.state.option1}
+                onChange={this.handleChange}
+                required
+              />
+              <Divider horizontal>Or</Divider>
+              <Form.Input
+                id="option2"
+                placeholder="Enter option two..."
+                value={this.state.option2}
+                onChange={this.handleChange}
+                required
+              />
+              <Form.Button size="tiny" fluid disabled={disabled}>
+                Submit
+              </Form.Button>
+            </Form>
+          </Grid.Column>
+        </Grid>
+      </Segment.Group>
     );
   }
 }
 
-export default QuestionNew;
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { handleSaveQuestion }
+)(QuestionNew);
