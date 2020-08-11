@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {
   Menu,
   Responsive,
-  Image,
   Grid,
   Button,
   Container
@@ -36,34 +35,23 @@ class Nav extends Component {
               <Button
                 content="Logout"
                 size="mini"
-                color="grey"
                 onClick={this.handleLogout}
               />
             </Menu.Item>
           </Menu.Menu>
         </Responsive>
-        <Responsive as={Fragment} minWidth={375} maxWidth={650}>
+        <Responsive as={Fragment} maxWidth={650}>
           <Grid columns={2} padded="vertically">
             <Grid.Row>
               <Grid.Column>
-                <Image
-                  src={users[authedUser].avatarURL}
-                  avatar
-                  spaced="right"
-                  verticalAlign="bottom"
-                />
                 {users[authedUser].name}
               </Grid.Column>
               <Grid.Column verticalAlign="bottom" textAlign="right">
-                <Button
-                  content="Logout"
-                  labelPosition="right"
-                  basic
-                  compact
-                  icon="log out"
-                  size="mini"
-                  onClick={this.handleLogout}
-                />
+              <Button
+                content="Logout"
+                size="mini"
+                onClick={this.handleLogout}
+              />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -80,40 +68,7 @@ class Nav extends Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-        </Responsive>
-        <Responsive as={Fragment} maxWidth={374}>
-          <Grid padded="vertically" columns={1}>
-            <Grid.Row>
-              <Grid.Column>
-                Hello,
-                {users[authedUser].name}
-                <Button
-                  content="Logout"
-                  labelPosition="right"
-                  basic
-                  compact
-                  icon="log out"
-                  size="mini"
-                  floated="right"
-                  onClick={this.handleLogout}
-                />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column>
-                <Menu pointing secondary widths={3}>
-                  <Menu.Item name="home" as={NavLink} to="/" exact />
-                  <Menu.Item name="new" as={NavLink} to="/add" />
-                  <Menu.Item
-                    name="leader board"
-                    as={NavLink}
-                    to="/leaderboard"
-                  />
-                </Menu>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Responsive>
+        </Responsive>        
       </Container>
     );
   }
