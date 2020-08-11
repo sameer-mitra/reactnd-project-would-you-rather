@@ -32,7 +32,7 @@ class App extends Component {
                 <Route exact path="/" component={Dashboard} />
                 <Route path="/questions/error" component={Error} />
                 <Route path="/questions/:question_id" component={User} />
-                <Route path="/new" component={QuestionNew} />
+                <Route path="/add" component={QuestionNew} />
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route component={Error} />
               </Switch>

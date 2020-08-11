@@ -7,8 +7,7 @@ import {
   Segment,
   Progress,
   Label,
-  Button,
-  Icon
+  Button
 } from 'semantic-ui-react';
 import { styles } from '../utils/helpers';
 

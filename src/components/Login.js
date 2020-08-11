@@ -35,13 +35,6 @@ export class Login extends Component {
   }
 }
 
-const LoginHeader = () => (
-  <Header as="h4" block attached="top" textAlign="center">
-    <Header.Content>Welcome to the Would You Rather App!</Header.Content>
-    <Header.Subheader>Please sign in to continue</Header.Subheader>
-  </Header>
-);
-
 const LoginGridLayout = ({ image, form, loading }) => (
   <div>
     <Grid padded textAlign="center">

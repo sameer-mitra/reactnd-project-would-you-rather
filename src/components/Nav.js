@@ -24,7 +24,7 @@ class Nav extends Component {
       <Container>
         <Responsive as={Menu} minWidth={651} pointing secondary>
           <Menu.Item name="home" as={NavLink} to="/" exact />
-          <Menu.Item name="new" as={NavLink} to="/new" />
+          <Menu.Item name="new" as={NavLink} to="/add" />
           <Menu.Item name="leader board" as={NavLink} to="/leaderboard" />
           <Menu.Menu position="right">
             <Menu.Item>
@@ -35,11 +35,8 @@ class Nav extends Component {
               <Menu.Item>
               <Button
                 content="Logout"
-                labelPosition="right"
-                basic
-                compact
-                icon="log out"
                 size="mini"
+                color="grey"
                 onClick={this.handleLogout}
               />
             </Menu.Item>

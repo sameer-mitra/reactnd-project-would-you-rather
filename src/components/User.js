@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Segment, Header, Grid, Image } from 'semantic-ui-react';
+import { Segment, Grid, Image } from 'semantic-ui-react';
 import Question from './Question';
 import QuestionResult from './QuestionResult';
 import QuestionPreview from './QuestionPreview';
@@ -58,20 +58,13 @@ export class User extends Component {
 
     return (
       <Segment.Group>
-        <Header
-          as="h5"
-          textAlign="left"
-          block
-          attached="top"
-          style={{ borderTop: borderTop }}
-        >
-          {author.name} asks:
-        </Header>
-
-        <Grid divided padded>
+        <Grid divided padded style={{ borderTop: borderTop }}>
           <Grid.Row>
-            <Grid.Column width={5}>
-              <Image src={author.avatarURL} />
+            <Grid.Column width={4}>
+              <b>{author.name} asks</b>
+              <div>
+                <Image src={author.avatarURL} />
+              </div>
             </Grid.Column>
             <Grid.Column width={11}>
               <QuestionContent

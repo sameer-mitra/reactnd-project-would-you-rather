@@ -6,11 +6,8 @@ import {
   Grid,
   Header,
   Image,
-  Label,
-  Divider
+  Label
 } from 'semantic-ui-react';
-
-const trophyColor = ['yellow', 'grey', 'orange'];
 
 export class Leaderboard extends Component {
   static propType = {
